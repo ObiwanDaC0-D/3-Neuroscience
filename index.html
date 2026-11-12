@@ -52,7 +52,7 @@ const SOURCES=[["Purves et al.","Neuroscience","https://www.ncbi.nlm.nih.gov/boo
 const $=id=>document.getElementById(id);function el(tag,text,cls){const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x}
 let state={reviewed:[],answers:[]};try{const s=JSON.parse(localStorage.getItem("neuroscience-v1")||"{}");if(Array.isArray(s.reviewed))state.reviewed=s.reviewed;if(Array.isArray(s.answers))state.answers=s.answers}catch(e){}
 function save(){try{localStorage.setItem("neuroscience-v1",JSON.stringify(state))}catch(e){}}
-let dashboardReady=false;const tabs=["Explore","Curriculum","Library","Neuron Lab","Neural Simulator","Adaptive Study","Assessment","Mastery","Brain Atlas","Systems","Connections","Research","Methods","Practice","Evidence","Progress"];
+let dashboardReady=false;const tabs=["Explore","Curriculum","Library","Brain Atlas","Systems","Connections","Research","Methods","Neuron Lab","Neural Simulator","Adaptive Study","Assessment","Mastery","Practice","Evidence","Progress"];
 function switchTab(name){tabs.forEach(t=>$(t.toLowerCase().replaceAll(" ","")).classList.toggle("hidden",t!==name));document.querySelectorAll("#nav button").forEach(b=>b.setAttribute("aria-pressed",String(b.textContent===name)));if(name==="Progress")renderProgress();if(name==="Explore"&&dashboardReady)renderDashboard();if(name==="Mastery")renderMastery();window.scrollTo(0,0)}
 tabs.forEach(t=>{const b=el("button",t);b.onclick=()=>switchTab(t);$("nav").append(b)});switchTab("Explore");
 const categories=[...new Set(DATA.map(x=>x[0]))];$("total").textContent=DATA.length;
