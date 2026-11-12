@@ -37,6 +37,36 @@ svg{max-width:100%}
 
 /* Shared learning landing page */
 .learning-home-intro{background:linear-gradient(130deg,#18354b,#112338 75%);border:1px solid var(--line);border-radius:18px;padding:24px;margin:0 0 20px}.learning-home-intro h2{margin:7px 0 8px}.learning-home-intro p{max-width:720px;margin:0 0 18px}.learning-home-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:10px}.learning-home-action{width:100%;text-align:left;min-height:48px;padding:12px 14px;background:#1b364b;border:1px solid #416277;border-radius:12px;color:var(--text);font-weight:600}.learning-home-action:hover{background:#244a56;border-color:var(--accent)}#explore>.grid,#explore>.panel{margin-bottom:20px}@media(max-width:680px){.learning-home-intro{padding:18px}.learning-home-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.learning-home-action{font-size:14px;padding:10px}}@media(max-width:360px){.learning-home-actions{grid-template-columns:1fr}}
+
+/* Cross-device usability hardening: compact phones, touch and safe areas */
+html,body{max-width:100%;overflow-x:clip}
+body{overflow-wrap:break-word}
+main,section,.panel,.card,.toolbar,.grid{min-width:0}
+#nav{max-width:100%;scroll-padding-inline:12px;padding-bottom:14px}
+#nav button{touch-action:manipulation}
+button,a,select,input{touch-action:manipulation}
+button{max-width:100%;overflow-wrap:anywhere}
+input,select,textarea{font-size:max(16px,1rem)}
+img,video,canvas,iframe{max-width:100%;height:auto}
+svg{max-width:100%}
+table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+pre,code{overflow-wrap:anywhere}
+.panel,.card{overflow-wrap:anywhere}
+footer{padding-bottom:max(22px,env(safe-area-inset-bottom))}
+@media(max-width:680px){
+  #nav{scroll-snap-type:x proximity}
+  #nav button{scroll-snap-align:start}
+  .toolbar{min-width:0}
+  .toolbar>input,.toolbar>select{min-width:0;max-width:100%}
+  .learning-home-actions{gap:8px}
+}
+@media(max-width:420px){
+  header h1{font-size:clamp(2rem,10vw,2.5rem)}
+  .panel,.card{padding:15px}
+  .toolbar{gap:8px}
+}
+@media(hover:none){button:hover{transform:none}}
+
 </style></head><body><header><a class="back" href="https://obiwandac0-d.github.io/0-Central-Hub/">← Central Hub</a><div class="eyebrow" style="margin-top:34px">LEARNING REPOSITORY · 03</div><h1>Neuroscience</h1><p class="lead">Understand the neural foundations of thought, behavior, emotion, memory, and learning. Explore concepts, compare systems, practice retrieval, and track your progress.</p><nav id="nav" aria-label="Sections"></nav></header><main>
 <section id="explore"><div class="learning-home-intro"><div class="eyebrow">LEARNING OVERVIEW</div><h2>Explore · Understand · Apply</h2><p>Investigate neural mechanisms, brain systems, and cognition. Choose a learning pathway, jump into a tool, or return to your progress at any time.</p><div class="learning-home-actions"><button type="button" class="learning-home-action" data-home-tab="Curriculum">Continue curriculum</button><button type="button" class="learning-home-action" data-home-tab="Neural Simulator">Explore simulations</button><button type="button" class="learning-home-action" data-home-tab="Adaptive Study">Practice retrieval</button><button type="button" class="learning-home-action" data-home-tab="Progress">View progress</button></div></div><div class="grid"><div class="panel"><div class="stat" id="total"></div><div class="muted">Neuroscience concepts</div></div><div class="panel"><div class="stat" id="reviewCount"></div><div class="muted">Concepts reviewed</div></div></div><div class="panel stack" style="margin-top:18px"><div class="tag">YOUR LEARNING DASHBOARD</div><h2 style="margin:0">Learning overview</h2><div class="grid" id="learningMetrics"></div><div id="learningNext"></div><div class="toolbar"><button id="dashboardCurriculum" class="primary">Continue curriculum</button><button id="dashboardStudy">Review due concepts</button><button id="dashboardSimulator">Explore simulations</button></div></div><h2>Learning pathways</h2><div class="grid" id="pathways"></div></section>
 <section id="curriculum" class="hidden"><h2>Guided neuroscience curriculum</h2><p>Follow a structured sequence from cellular signaling to brain-wide cognition. Each lesson connects mechanisms, empirical methods, and limitations.</p><div class="panel stack"><div class="toolbar"><label for="lessonSelect">Lesson</label><select id="lessonSelect" aria-label="Choose lesson"></select><button id="lessonPrevious">← Previous</button><button id="lessonNext" class="primary">Next →</button></div><div class="tag" id="lessonPosition"></div><h2 id="lessonTitle"></h2><p id="lessonOverview"></p><h3>Mechanistic explanation</h3><p id="lessonMechanism"></p><h3>Research question</h3><p id="lessonQuestion"></p><h3>Critical distinction</h3><p id="lessonCaution"></p><div class="toolbar"><button id="lessonConcept">Open related concept</button><button id="lessonComplete" class="primary">Mark lesson complete</button></div></div><h2>Curriculum overview</h2><div id="lessonCards" class="grid"></div><h2>Cross-scale experiment</h2><p>Explore a simplified pathway from stimulus strength to firing frequency to a hypothetical population response. The relationships are illustrative, not fitted to empirical data.</p><div class="panel stack"><label for="scaleInput">Input intensity: <span id="scaleInputValue">50</span>%</label><input type="range" id="scaleInput" min="0" max="100" value="50"><label for="scaleGain">Population gain: <span id="scaleGainValue">1.0</span>×</label><input type="range" id="scaleGain" min="5" max="20" value="10"><svg id="scalePlot" viewBox="0 0 720 245" style="width:100%;background:#0b1829;border-radius:14px" role="img" aria-label="Illustrative stimulus to firing rate to population response chart"></svg><p id="scaleSummary" aria-live="polite"></p><p class="small">A stronger modeled input can increase firing in this toy example, but real brain activity also depends on inhibition, adaptation, connectivity, timing, and measurement.</p></div></section><section id="library" class="hidden"><h2>Concept library</h2><div class="toolbar"><input type="search" id="search" placeholder="Search neuroscience" aria-label="Search concepts"><select id="filter" aria-label="Filter pathway"></select></div><p id="count" class="small"></p><div class="grid" id="cards"></div></section>
